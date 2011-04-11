@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Model-View-Controller &mdash; Django Šnelkurs v0.1 documentation</title>
+    <title>Model-Template-View &mdash; Django Šnelkurs v0.1 documentation</title>
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="Django Šnelkurs v0.1 documentation" href="index.html" />
-    <link rel="prev" title="Django Šnelkurs" href="intro.html" /> 
+    <link rel="prev" title="O Django-tu" href="intro.html" /> 
   </head>
   <body>
     <div class="related">
@@ -33,7 +33,7 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="intro.html" title="Django Šnelkurs"
+          <a href="intro.html" title="O Django-tu"
              accesskey="P">previous</a> |</li>
         <li><a href="index.html">Django Šnelkurs v0.1 documentation</a> &raquo;</li> 
       </ul>
@@ -44,9 +44,45 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="model-view-controller">
-<h1>Model-View-Controller<a class="headerlink" href="#model-view-controller" title="Permalink to this headline">¶</a></h1>
-<p>blabla</p>
+  <div class="section" id="model-template-view">
+<h1>Model-Template-View<a class="headerlink" href="#model-template-view" title="Permalink to this headline">¶</a></h1>
+<p>Django sledi tako imenovani <a class="reference external" href="http://en.wikipedia.org/wiki/Model–view–controller">*Model-View-Controller*</a> filozofiji, kar pomeni, da so aplikacije zasnovane tako, da imamo čisto ločitev podatkovne baze (<em>Model</em>), aplikativne logike (<em>Controller</em>) in izrisovalnih predlog (<em>View</em>). To pomaga ohranjati kodo čisto in brez grdih <em>hackov</em> in predloge brez aplikativne logike (in posledično veliko bolj prijazne očem oblikovalcev).</p>
+<p>Striktno gledano se Django opredeljuje kot MTV oz. Model-Template-View, pri čemer Template služi kot View in View kot kontroler. Takšno poimenovanje se uporablja tudi v Django-tovi dokumentaciji in ker je za vse praktične namene ekvivalentno MVC, bomo za namene zmanjšanja zmešnjave ob obračanju na uradno dokumentacijo sledili Django-tovemu poimenovanju.</p>
+<div class="section" id="bojni-nacrt">
+<h2>Bojni načrt<a class="headerlink" href="#bojni-nacrt" title="Permalink to this headline">¶</a></h2>
+<p>Odločili smo se, da potrebuje naša homepatska lekarna poleg spletne trgovine tudi možnost objavljanja člankov, ki bodo v pomoč našim kupcem pri reševanju njihovih tegob.</p>
+</div>
+<div class="section" id="podatkovna-baza-model">
+<h2>Podatkovna baza - Model<a class="headerlink" href="#podatkovna-baza-model" title="Permalink to this headline">¶</a></h2>
+<p>Najprej nam bo v pomoč razbiti naš problem na manjše podprobleme. Očitno bomo morali prikazovati članke, za kar bo skrbel naš <em>View</em> s svojo aplikativno logiko, a le-tega še ne rabimo takoj sprogramirati, saj moramo pred prikazom člankov le-te shraniti.</p>
+<p>(<em>Samo kreiranje projekta in nove aplikacije na te mestu še ni pomembno in lahko še počaka nekaj minut.</em>)</p>
+<p>Preden pa jih shranimo pa je potrebno tudi premisliti katere vse podatke potrebujemo in v kakšnem formatu jih bomo shranili, kar načrtujemo v našem model-u.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Reporter</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">full_name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">70</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__unicode__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">full_name</span>
+
+<span class="k">class</span> <span class="nc">Article</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">pub_date</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">()</span>
+    <span class="n">headline</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
+    <span class="n">reporter</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Reporter</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__unicode__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">headline</span>
+</pre></div>
+</div>
+<p>Ker Django uporablja ORM (<a class="reference external" href="http://en.wikipedia.org/wiki/Object-relational_mapping">Object-relational mapping</a>) dostop do podatkovne baze, predstavimo tabele kot objekte, katerih atributi so stolpci v tabelah, vrstice v tabelah pa so instance teh objektov.</p>
+<p>V našem primeru smo tako razredu Reporter (novinar) dodali le atribut full_name (polno ime) in mu podali najdaljšo dolžino le-tega, razredu Article (članek) pa smo dali atribute datuma objave, naslova, vsebino in kateri novinar ga je napisal.</p>
+<p>Naslednji korak je te tabele dodati tudi v samo podatkovono bazo, kar storimo z ukazom:</p>
+<div class="highlight-python"><pre>python manage.py syncdb</pre>
+</div>
+<p>Ko Django za nas ustvari tabele se lahko zabava začne.</p>
+</div>
+<div class="section" id="dostop-do-podatkovne-baze">
+<h2>Dostop do podatkovne baze<a class="headerlink" href="#dostop-do-podatkovne-baze" title="Permalink to this headline">¶</a></h2>
+</div>
 </div>
 
 
@@ -55,9 +91,19 @@
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Model-Template-View</a><ul>
+<li><a class="reference internal" href="#bojni-nacrt">Bojni načrt</a></li>
+<li><a class="reference internal" href="#podatkovna-baza-model">Podatkovna baza - Model</a></li>
+<li><a class="reference internal" href="#dostop-do-podatkovne-baze">Dostop do podatkovne baze</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="intro.html"
-                        title="previous chapter">Django Šnelkurs</a></p>
+                        title="previous chapter">O Django-tu</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/mvcidea.txt"
@@ -87,7 +133,7 @@
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="intro.html" title="Django Šnelkurs"
+          <a href="intro.html" title="O Django-tu"
              >previous</a> |</li>
         <li><a href="index.html">Django Šnelkurs v0.1 documentation</a> &raquo;</li> 
       </ul>

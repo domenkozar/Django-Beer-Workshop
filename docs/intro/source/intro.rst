@@ -10,7 +10,7 @@ Kaj je Django?
     
     Django ni sistem za upravljanje vsebine (CMS - Content Management System) sam po sebi in ga ne moremo uporabljati kot rešitev na ključ. Je spletno ogrodje, s katerim lahko razvijemo spletne strani. Tako da nima smisla primerjati z Plone-om ali Drupal-om, ker je Django orodje, s katerim bi kvečjemu razvil kaj takšnega. 
 
-    Kljub temu pa ima Django marsikatero značilnost, s katero se olajša razvoj CMS strani - napredna administrativna plošča za izbrane modele je samo ena izmed takšnih značilnosti.
+    Kljub temu pa ima Django marsikatero značilnost, s katero se olajša razvoj CMS strani - napredna administrativna plošča za izbrane tabele v podatkovni bazi je samo ena izmed takšnih značilnosti.
     
 Ampak, kaj je "Django"?
 -----------------------
@@ -35,3 +35,5 @@ Kdo razvija Django?
 ---------------------
 
 Django so prvotno razvili v spletnem uredništvu World Online iz Lawrence, Kansas, ZDA, dandanes pa ga razvija mednarodna `ekipa prostovoljcev <http://docs.djangoproject.com/en/1.3/internals/committers/>`_.
+
+Junija 2008 je bilo objavljeno da bo v prihodnje Django Software Foundation skrbel za razvoj Django-ta. 
