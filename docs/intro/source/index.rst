@@ -21,9 +21,12 @@ Kazalo:
 
 .. toctree::
    :maxdepth: 2
-
+   
+   beforewestart
    intro
    mvcidea
+   databasemagic
+   urlsandviews
 
 Indeks in iskanje
 ==================

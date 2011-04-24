@@ -17,6 +17,13 @@ Ampak, kaj je "Django"?
 
     Django je poimenovan po `Django Reinhardt-u <http://en.wikipedia.org/wiki/Django_Reinhardt>`_, romskemu kitaristu, ki se še danes smatra za enega izmed najboljših kitaristov na svetu.
     
+Kaj je Python?
+--------------
+
+Python je tolmačeni, višje nivojski programski jezik, katerega cilj je združiti izredno moč z zelo berljivo sintakso in ki podpira module, izjeme, dinamične tipe, zelo visokonivojske dinamične podatkovne strukte in razrede. 
+
+Zasnovan je bil v poznih osemdesetih, Guido van Rossum, Pythonov `dobrovoljni doživljenski diktator <http://en.wikipedia.org/wiki/Benevolent_Dictator_For_Life>`_, pa ga je začel implementirati 1989.
+
 Je Django stabilen?
 -------------------
 
