@@ -1,10 +1,10 @@
-O Django-tu
+O Django-u
 ===========================================
 
 Kaj je Django?
 --------------
 
-    `Django <http://en.wikipedia.org/wiki/Django_(Web_framework)>`_ je visoko-nivojsko `Python <http://python.org>`_ spletno ogrodje, ki spodbuja hiter razvoj in čisto zasnovo in je v razvoju že več štiri leta v spletnem uredništvu `Lawrence Journal-World-a <http://www.ljworld.com/>`_ in je bilo julija 2005 dano v javnost pod BSD licenco.
+    `Django <http://en.wikipedia.org/wiki/Django_(Web_framework)>`_ je visoko-nivojsko `Python <http://python.org>`_ spletno ogrodje, ki spodbuja hiter razvoj in čisto zasnovo ter je v razvoju že več štiri leta v spletnem uredništvu `Lawrence Journal-World-a <http://www.ljworld.com/>`_ in je bilo julija 2005 dano v javnost pod `BSD licenco <http://www.opensource.org/licenses/bsd-license.php>`_.
 
     Django je bil zasnovan z dvema izivoma v mislih - stresnimi razmerami novinarskih sob in strogimi zahtevami izkušenih razvijalcev, ki so ga tudi razvili. Pri tem poskuša avtomatizirati kar se da veliko za spletne razmere pogostih operacij (`caching <http://docs.djangoproject.com/en/1.3/topics/cache/>`_, `ponujanje vsebine - syndication <http://docs.djangoproject.com/en/dev/ref/contrib/syndication/?from=olddocs>`_, `komentiranje <http://docs.djangoproject.com/en/dev/ref/contrib/comments/>`_, itd.) in sledi `DRY (Don't Repeat Yourself - ne ponavljaj se) <http://c2.com/cgi/wiki?DontRepeatYourself>`_ principu.
     
@@ -12,7 +12,7 @@ Kaj je Django?
 
     Kljub temu pa ima Django marsikatero značilnost, s katero se olajša razvoj CMS strani - napredna administrativna plošča za izbrane tabele v podatkovni bazi je samo ena izmed takšnih značilnosti.
     
-Ampak, kaj je "Django"?
+Ampak, kaj pomeni "Django"?
 -----------------------
 
     Django je poimenovan po `Django Reinhardt-u <http://en.wikipedia.org/wiki/Django_Reinhardt>`_, romskemu kitaristu, ki se še danes smatra za enega izmed najboljših kitaristov na svetu.
@@ -20,7 +20,7 @@ Ampak, kaj je "Django"?
 Kaj je Python?
 --------------
 
-Python je tolmačeni, višje nivojski programski jezik, katerega cilj je združiti izredno moč z zelo berljivo sintakso in ki podpira module, izjeme, dinamične tipe, zelo visokonivojske dinamične podatkovne strukte in razrede. 
+Python je tolmačen, višje nivojski programski jezik, katerega cilj je združiti izredno moč z zelo berljivo sintakso in ki podpira module, izjeme, dinamične tipe, zelo visokonivojske dinamične podatkovne strukte in razrede. 
 
 Zasnovan je bil v poznih osemdesetih, Guido van Rossum, Pythonov `dobrovoljni doživljenski diktator <http://en.wikipedia.org/wiki/Benevolent_Dictator_For_Life>`_, pa ga je začel implementirati 1989.
 

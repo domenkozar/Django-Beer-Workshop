@@ -8,4 +8,4 @@ Striktno gledano se Django opredeljuje kot MTV oz. Model-Template-View, pri čem
 Bojni načrt
 -----------
 
-Odločili smo se, da potrebuje naša homepatska lekarna poleg spletne trgovine tudi možnost objavljanja člankov, ki bodo v pomoč našim kupcem pri reševanju njihovih tegob.
+Odločili smo se, da potrebuje naša homeopatska lekarna poleg spletne trgovine tudi možnost objavljanja člankov, ki bodo v pomoč našim kupcem pri reševanju njihovih tegob.
