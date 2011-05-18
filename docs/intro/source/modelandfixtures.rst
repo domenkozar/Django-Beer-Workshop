@@ -5,7 +5,7 @@ Pred pisanjem samih modelov za začetek postojimo in najprej razmislimo o našem
 
 Podatki o seriji, ki jih bomo shranili bodo unikatni identifikator, ime serije, IMDB unikatni identifikator in ocena same serije.
 
-Vsaka epizoda, ki jo bomo shranili, bo pripadala eni seriji, kar pomeni da bomo moralo ustvari 1:N relacijo v podatkovni bazi, poleg tega pa bomo shranili še ime, IMDB identifikator, oceno, številko epizode, številko serije in datum prvega predvajanja. 
+Vsaka epizoda, ki jo bomo shranili, bo pripadala eni seriji, kar pomeni da bomo morali ustvariti še 1:N relacijo v podatkovni bazi, poleg tega pa bomo shranili še ime, IMDB identifikator, oceno, številko epizode, številko serije in datum prvega predvajanja. 
 
 Modela bosta torej izgledala tako:
 

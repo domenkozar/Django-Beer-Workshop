@@ -1,7 +1,7 @@
 V začetku je Bog ustvaril nebo in zemljo
 ========================================
 
-Preden se lotimo pisanja model, moramo najprej ustvariti nov projekt, k kateremu bodo naše aplikacije pripadale.
+Preden se lotimo pisanja modelov, moramo najprej ustvariti nov projekt, h kateremu bodo naše aplikacije pripadale.
 
 Django nam bo pri tem pomagal z avtomatskim generiranjem kode, ki jo potrebuje osnovni projekt - projektne nastavitve, ki vsebujejo opcije za podatkovno bazo, ali projekt uporablja več jezikov (internacionalizacijske nastavitve), kje se nahajajo statične datoteke, kje so predloge, ipd. - v splošnem torej vse kar je specifično za Django ali aplikacije, ki jih uporabljamo.
 
@@ -17,7 +17,7 @@ Ta ukaz bo ustvaril naslednjo direktorijsko strukturo::
         settings.py
         urls.py
 
-Na kratko smo nekaj že omenili o teh datotekah, njihov pomen pa je očiten tudi iz njihovih imen:
+Na kratko smo nekaj že omenili te datoteke, njihov pomen pa je bolj ali manj očiten tudi iz njihovih imen:
 
 * ``__init__.py``: Prazna datoteka, ki Python-u pove, da naj obravnava direktorij kot Python-ov paket. 
 * ``manage.py``: Orodje za ukazno vrstico, ki omogoča delo z projektom
@@ -56,13 +56,59 @@ Ustvarjenje aplikacije
 
 Potem ko smo zaključili s splošnimi projektnimi nastavitvami lahko nadaljujemo z ustvarjanjem svoje prve aplikacije. Vsaka aplikacija je, podobno kot sam projekt, svoj Python paket. Ustvarimo jo z ukazom::
 
-    python manage.py startapp blog
+    python manage.py startapp series
     
 kar ustvari sledečo datotečno strukturo::
 
-    polls/
+    series/
         __init__.py
         models.py
         tests.py
         views.py
 
+Končno pa lahko nadaljujemo z zanimivejšim delom - zasnovanjem modelov.
+
+Ker Django sledi principu DRY ("Don't repeat yourself"), je model edini vir podatkov o naših podatkih, kar pomeni da lahko na podlagi modela izpeljemo vrsto drugih stvari (na primer avtomatsko preverjanje pravilnosti formata podatkov, ki jih vnašamo v bazo).
+
+Pred pisanjem samih modelov za začetek postojimo in najprej razmislimo o našem problemu. Če hočemo v našo videoteko shranjevati podatke o serijah, moramo torej shraniti podatke o seriji in njenih epizodah. To pomeni, da bomo imeli dve tabeli (eno Serie in drugo Episode).
+
+Podatki o seriji, ki jih bomo shranili bodo unikatni identifikator, ime serije, IMDB unikatni identifikator in ocena same serije.
+
+Vsaka epizoda, ki jo bomo shranili, bo pripadala eni seriji, kar pomeni da bomo morali ustvariti še 1:N relacijo v podatkovni bazi, poleg tega pa bomo shranili še ime, IMDB identifikator, oceno, številko epizode, številko serije in datum prvega predvajanja. 
+
+Modela bosta torej izgledala tako::
+
+    class Episode(models.Model):
+        name = models.CharField(max_length=240)
+        imdb_id = models.IntegerField('')
+        rating = models.FloatField()
+        episode_number = models.IntegerField()
+        season_number = models.IntegerField()
+        airdate = models.DateTimeField() # timezone? l10n?
+
+        serie = models.ForeignKey('Serie')
+
+
+    class Serie(models.Model):
+        name = models.CharField(max_length=240)
+        imdb_id = models.IntegerField('')
+        rating = models.FloatField()
+        poster = models.ImageField(upload_to="series")
+
+Kljub očitnosti kode si poglejmo nekoliko podrobneje s čim imamo dejansko opravka.
+
+Vsak model je predstavljen kot podrazred razreda ``django.db.models.Model`` in ima več spremenljivk, od katerih vsaka predstavlja polje v podatkovni bazi. Vsako polje je predstavljeno kot instanca razreda ``Field``, ki določi tip teh podatkov. Ime vsake instance ``Field-a`` pa je ime polja v računalniku prijazni obliki - mi bomo uporabljali to v naši aplikaciji, podatkovna baza pa kot ime stolpca v tabeli.
+
+S prvim argumentom ``Field-u`` lahko podamo tudi ljudem prijaznejše oblike imen tabel, ki se bodo prikazovali v administrativnem vmesniku in obrazcih. 
+
+Nekatera polja razreda ``Field`` imajo obvezne parametre, ki pa se ne uporabljajo zgolj v shemi podatkovne baze, ampak tudi za preverjanje podatkov, preden se vpišejo v podatkovno bazo. 
+
+``ForeignKey`` predstavlja našo relacijo pripadanja epizode eni seriji.
+
+Z temi podatki je Django sposoben izdelati shemo podatkovne baze in Python API za dostop do Episode in Serie objektov. Preden pa lahko naš model dejansko uporabimo, moramo našo aplikacijo še dodati med nameščene aplikacije (``INSTALLED_APPS``) v nastavitvah.
+
+Tako odpremo datoteko ``settings.py`` in v ``INSTALLED_APPS`` dodamo na koncu ``series`` (ne pozabiti dodati vejco na konec prejšnje vrstice) in ponovno poženemo ukaz::
+
+    python manage.py syncdb
+
+``syncdb`` bo ustvaril tabele aplikacij, ki prej še niso bile uporabljene, za le-te pa bo tudi uvozil podatke in ustvaril indekse. Če hočemo spremeniti tabele, ki že obstajajo, pa je potrebno ali ročno spremeniti bazo ali pa poseči po orodjih, kot je south. 
