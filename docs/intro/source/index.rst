@@ -17,7 +17,7 @@ Celotna delavnica je v večji meri navdihnjena po Django-ovi uradni dokumentacij
 
 Specifično, dokument in koda sta zasnovana po `Django at a glance <http://docs.djangoproject.com/en/1.3/intro/overview/>`_.
 
-Kazalo:
+Začeteki, koncepti in ostale malenkosti:
 
 .. toctree::
    :maxdepth: 2
@@ -27,6 +27,14 @@ Kazalo:
    mvcidea
    databasemagic
    urlsandviews
+
+Nekoliko resneje: TV serije
+.. toctree::
+   :maxdepth: 2
+   
+   tvidea
+   createprojectandapp
+   modelandfixtures
 
 
 Indeks in iskanje
