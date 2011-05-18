@@ -5,8 +5,8 @@ from django.db import models
 # i18n
 class Episode(models.Model):
     name = models.CharField(max_length=240)
-    imdb_id = models.IntegerField('')
-    rating = models.FloatField()
+    imdb_id = models.IntegerField('', blank=True, null=True)
+    rating = models.FloatField(blank=True, null=True)
     episode_number = models.IntegerField()
     season_number = models.IntegerField()
     airdate = models.DateTimeField() # timezone? l10n?
@@ -16,7 +16,7 @@ class Episode(models.Model):
 
 class Serie(models.Model):
     name = models.CharField(max_length=240)
-    imdb_id = models.IntegerField('')
+    imdb_id = models.IntegerField('', blank=True, null=True)
     rating = models.FloatField()
     poster = models.ImageField(upload_to="series")
 
